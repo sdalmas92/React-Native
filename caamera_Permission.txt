@@ -1,38 +1,17 @@
-Getting Started
-We are going to start by creating a new React Native project, let's call it AwesomeCamera!
-
 1> Create Project
-npx react-native init AwesomeCamera
-cd AwesomeCamera
-npx react-native run-android # or run-ios
-Now that we have a clean project to start working on, we need to install a couple of packages to get things going! First,
- the previously mentioned React Native Camera and a Vector Icon library to get a nice camera icon for our app.
-
-npm install --save react-native-vector-icons react-native-camera
+npx react-native init CameraApp
+cd CameraApp
+npx react-native run-android
+npm install --save react-native-vector-icons 
+npm install react-native-camera
 cd ios && pod install && cd ..
-npx react-native link react-native-vector-icons
 
 2> Add permissions
 And we need to set up permissions for both Android and iOS. In the case of Android,
  we need to go to the android/app/src/main/AndroidManifest.xml file and add
 /* Required *
 <uses-permission android:name="android.permission.CAMERA"></uses-permission>
-/* Include this only if you are planning to use the microphone for video recording */
-
 <uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
-/* Include this only if you are planning to use the camera roll */
-
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-And we need to set up permissions for both Android and iOS. In the case of Android, we need to go to the android/app/src/main/AndroidManifest.xml file and add
-
-/* Required *
-<uses-permission android:name="android.permission.CAMERA"></uses-permission>
-/* Include this only if you are planning to use the microphone for video recording */
-
-<uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
-/* Include this only if you are planning to use the camera roll */
-
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 
@@ -47,24 +26,15 @@ android {
  }
 }
 
-In the case of iOS we just need to edit ios/AwesomeCamera/Info.plist and add inside <dict></dict>
+4> iOS Permissions
+In the case of iOS we just need to edit ios/CameraApp/Info.plist and add inside <dict></dict>
 
-/* Required with iOS 10 and higher */
+<key>NSCameraUsageDescription</key><string>
+<key>NSPhotoLibraryAddUsageDescription</key><string>
+<key>NSPhotoLibraryUsageDescription</key><string>
+<key>NSMicrophoneUsageDescription</key><string>
 
-<key>NSCameraUsageDescription</key><string>Your message to user when the camera is accessed for the first time</string>
-/* Required with iOS 11 and higher: include this only if you are planning to use the camera roll */
-
-<key>NSPhotoLibraryAddUsageDescription</key><string>Your message to user when the photo library is accessed for the first time</string>
-/* Include this only if you are planning to use the camera roll */
-
-<key>NSPhotoLibraryUsageDescription</key><string>Your message to user when the photo library is accessed for the first time</string>
-/* Include this only if you are planning to use the microphone for video recording */
-
-<key>NSMicrophoneUsageDescription</key><string>Your message to user when the microphone is accessed for the first time</string>
-For our current example, we just need access to the camera so no microphone or photo library access is required. Let’s start with the Camera component.
- On the components/Camera.js we’ll have
-
-4> AVD Manager setting
+5> AVD Manager setting
 Using your webcam as the camera of your emulator
 The Android emulator comes with a nice feature that allows developers to use your laptop's webcam as the emulated device camera.
  To configure this we need to open Android Studio and search for the AVD Manager. We need to click on the pencil icon for the device
